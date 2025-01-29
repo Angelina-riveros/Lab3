@@ -228,8 +228,10 @@ public final class LinkedBag<T> implements BagInterface<T>
 
       Node currentNode = firstNode;
       while(currentNode != null){
-         if(!anotherBag.contains(currentNode.data)){
+         if(!copyAnotherBag.contains(currentNode.data)){
             differencedBag.add(currentNode.data);
+         } else {
+            copyAnotherBag.remove(currentNode.data);
          }
          currentNode = currentNode.next;
       }
