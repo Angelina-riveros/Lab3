@@ -224,17 +224,13 @@ public final class LinkedBag<T> implements BagInterface<T>
 
    public BagInterface<T> difference(BagInterface<T> anotherBag) {
        LinkedBag<T> differencedBag = new LinkedBag<T>();
-
-       // Copy all items from this bag
        T[] differencedBagArray = this.toArray();
        for (T item: differencedBagArray) {
            differencedBag.add(item);
        }
-
-       // Remove items that are in the other bag
        T[] anotherBagArray = anotherBag.toArray();
        for (T item: anotherBagArray) {
-           differencedBag.remove(item); // Remove one occurrence to handle duplicates
+           differencedBag.remove(item);
        }
 
        return differencedBag;
