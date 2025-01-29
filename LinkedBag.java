@@ -222,25 +222,21 @@ public final class LinkedBag<T> implements BagInterface<T>
       return intersectionedBag;
    }
 
-   public BagInterface<T> difference(BagInterface<T> anotherBag){
-      LinkedBag<T> differencedBag = new LinkedBag<T>();
-      LinkedBag<T> copyAnotherBag = new LinkedBag<T>();
+   public BagInterface<T> difference(BagInterface<T> anotherBag) {
+       LinkedBag<T> differencedBag = new LinkedBag<T>();
 
-      Node currentNode = firstNode;
-      while(currentNode != null){
-         if(!copyAnotherBag.contains(currentNode.data)){
-            differencedBag.add(currentNode.data);
-         } else {
-            copyAnotherBag.remove(currentNode.data);
-         }
-         currentNode = currentNode.next;
-      }
+       // Copy all items from this bag
+       T[] differencedBagArray = this.toArray();
+       for (T item: differencedBagArray) {
+           differencedBag.add(item);
+       }
 
-      T[] anotherBagArray = anotherBag.toArray();
-      for(T item: anotherBagArray){
-            copyAnotherBag.add(item);
-      }
+       // Remove items that are in the other bag
+       T[] anotherBagArray = anotherBag.toArray();
+       for (T item: anotherBagArray) {
+           differencedBag.remove(item); // Remove one occurrence to handle duplicates
+       }
 
-      return differencedBag;
+       return differencedBag;
    }
 } // end LinkedBag
